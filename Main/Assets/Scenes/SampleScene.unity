@@ -319,6 +319,7 @@ MonoBehaviour:
   moveSpeed: 5
   slowDown: 2
   rb: {fileID: 139104209}
+  animator: {fileID: 139104207}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

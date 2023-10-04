@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5;
     public float slowDown = 2;
     public Rigidbody2D rb;
+    public Animator animator;
     Vector2 movement;
 
     void Update()
@@ -13,6 +14,20 @@ public class PlayerMovement : MonoBehaviour
         //Input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        //Stuff for animation
+
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        //sqrMagnitude is supposedly more optimal???
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        //Brain-dead stupid solution pretty sure, but it works.
+        if(Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1) {
+            animator.SetFloat("LastHor",  Input.GetAxisRaw("Horizontal"));
+            animator.SetFloat("LastVer",  Input.GetAxisRaw("Vertical"));
+        }
+        
     }
     //Fixed update for no jittering while moving.
     void FixedUpdate() {
