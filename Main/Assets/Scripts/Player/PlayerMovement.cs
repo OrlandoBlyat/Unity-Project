@@ -34,14 +34,25 @@ public class PlayerMovement : MonoBehaviour
     //Fixed update for no jittering while moving.
     void FixedUpdate() {
 
-
+        /*
         Debug.Log(moveSpeed);
         // Nerf that diagonal nonsense.
         if(movement.x != 0 && movement.y != 0) {
             moveSpeed = moveSpeed -nerfSpeed;
         }
+        */
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            moveSpeed = sprintSpeed;
+        }
+
+        // Check if Left Shift key is released
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            moveSpeed = 5; // Reset to default walk speed
+        }
+
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         //Reset the movement speed, cracked solution but... 
-        moveSpeed = 4;
     }
 }
